@@ -121,6 +121,19 @@ describe('Token contract', function () {
         'OwnableUnauthorizedAccount',
       );
     });
+
+    it('Should fail if the account has not enough tokens', async function () {
+      const { hardhatToken, owner, addr1 } = await loadFixture(deployTokenFixture);
+
+      // Mint 100 tokens to addr1
+      await hardhatToken.mint(addr1.address, 100);
+
+      // Try to burn 101 tokens from addr1
+      await expect(hardhatToken.burn(addr1.address, 101)).to.be.revertedWithCustomError(
+        hardhatToken,
+        'ERC20InsufficientBalance',
+      );
+    });
   });
 
   describe('Transfer', function () {
