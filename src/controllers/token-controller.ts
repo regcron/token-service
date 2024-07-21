@@ -6,7 +6,7 @@ import { ApiError } from "@/utils/ApiError";
 import { readJsonFile } from '../utils/FileReader';
 import path from 'path';
 const { Web3 } = require("web3");
-const web3 = new Web3(process.env.SEPOLIA_RPC_ENDPOINT);
+const web3 = new Web3(process.env.SEPOLIA_RPC_ENDPOINT||"https://rpc.sepolia.org");
 
 // @desc     Get token information
 // @route    /token
